@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.contactlistmanager.ui.screens.AddContactScreen
 import com.example.contactlistmanager.ui.screens.ContactListScreen
 
 sealed class Screen(val route: String) {
@@ -32,7 +33,11 @@ fun NavGraph() {
         // Route 2: Add Contact Screen (Placeholder for now)
         composable(Screen.AddContact.route){
             // We will create the Screen Soon
-            Text(text = "Add Contact Screen, coming soon . . .")
+            AddContactScreen (
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
