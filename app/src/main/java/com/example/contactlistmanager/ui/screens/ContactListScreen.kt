@@ -17,14 +17,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.contactlistmanager.data.sampleContacts
 import com.example.contactlistmanager.ui.components.ContactCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactListScreen() {
+fun ContactListScreen(onAddContactClick: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -36,7 +35,7 @@ fun ContactListScreen() {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* We will add navigation here later */ },
+                onClick = onAddContactClick,
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
@@ -57,10 +56,4 @@ fun ContactListScreen() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ContactListScreenPreview() {
-    ContactListScreen()
 }

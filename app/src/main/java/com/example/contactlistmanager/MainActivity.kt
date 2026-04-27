@@ -7,10 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.contactlistmanager.ui.screens.ContactListScreen
+import com.example.contactlistmanager.ui.navigation.NavGraph
 import com.example.contactlistmanager.ui.theme.ContactListManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,17 +23,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     // Calling our main screen Here
-                    ContactListScreen()
+                        NavGraph()
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainActivityPreview() {
-    ContactListManagerTheme {
-        ContactListScreen()
     }
 }
