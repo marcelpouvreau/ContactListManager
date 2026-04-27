@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.contactlistmanager.data.ContactViewModel
 import com.example.contactlistmanager.ui.screens.AddContactScreen
 import com.example.contactlistmanager.ui.screens.ContactListScreen
 
@@ -14,7 +15,7 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun NavGraph() {
+fun NavGraph(viewModel: ContactViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val navController = rememberNavController()
 
     NavHost(
@@ -24,20 +25,17 @@ fun NavGraph() {
         // Route 1: The Main List
         composable(Screen.ContactList.route) {
             ContactListScreen(
-                onAddContactClick = {
+                viewModel = viewModel, onAddContactClick = {
                     navController.navigate(Screen.AddContact.route)
-                }
-            )
+                })
         }
 
         // Route 2: Add Contact Screen (Placeholder for now)
         composable(Screen.AddContact.route){
             // We will create the Screen Soon
-            AddContactScreen (
-                onBackClick = {
-                    navController.popBackStack()
-                }
-            )
+           AddContactScreen(viewModel = viewModel, onBackClick = {
+               navController.popBackStack()
+           })
         }
     }
 }

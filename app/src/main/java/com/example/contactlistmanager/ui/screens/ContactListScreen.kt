@@ -16,14 +16,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.contactlistmanager.data.sampleContacts
+import com.example.contactlistmanager.data.ContactViewModel
 import com.example.contactlistmanager.ui.components.ContactCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactListScreen(onAddContactClick: () -> Unit) {
+fun ContactListScreen(viewModel: ContactViewModel, onAddContactClick: () -> Unit) {
+    val contacts by viewModel.allContacts.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
             TopAppBar(
@@ -51,7 +54,7 @@ fun ContactListScreen(onAddContactClick: () -> Unit) {
                 .padding(horizontal = 16.dp),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            items(sampleContacts){ contact ->
+            items(contacts){ contact ->
                 ContactCard(contact = contact)
             }
         }

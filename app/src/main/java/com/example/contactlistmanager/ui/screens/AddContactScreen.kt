@@ -28,10 +28,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.contactlistmanager.data.ContactViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddContactScreen(onBackClick: () -> Unit) {
+fun AddContactScreen(viewModel: ContactViewModel, onBackClick: () -> Unit) {
     var name by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -107,7 +108,12 @@ fun AddContactScreen(onBackClick: () -> Unit) {
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { /* Save logic later */ },
+                onClick = {
+                    if(name.isNotBlank() && phone.isNotBlank()) {
+                        viewModel.saveContact(name, phone, email)
+                        onBackClick()
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
             ) {
